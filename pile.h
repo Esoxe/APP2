@@ -1,4 +1,5 @@
-
+#ifndef LISTES_H
+#define LISTES_H
 
 #include <stdbool.h>
 
@@ -25,27 +26,27 @@
 extern bool silent_mode;
 
 
-
-
-struct cellule {
-    char   command;
-    /* vous pouvez rajouter d'autres champs ici */
-    struct cellule *suivant;
+struct element {
+    char command;
+    struct element *suivant;
 };
-typedef struct cellule cellule_t;
+typedef struct element element_t;
 
-struct sequence {
-    cellule_t *tete;
+struct pile {
+    element_t *sommet;
 };
-typedef struct sequence sequence_t;
+typedef struct pile pile_t;
 
-cellule_t* nouvelleCellule (void);
+element_t* nouvelleElement (void);
 
-void detruireCellule (cellule_t*);
+void detruireElement (element_t*);
 
-void conversion (char *texte, sequence_t *seq);
+void empile(pile_t *p,char elem);
 
-void afficher (sequence_t* seq);
+char depile(pile_t *p);
 
+void calcul(pile_t *p ,char opp);
 
+void afficherPile(pile_t *p);
 
+#endif

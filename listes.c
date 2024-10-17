@@ -43,11 +43,6 @@ void conversion (char *texte, sequence_t *seq)
     }
 }
 
-
-
-
-
-
 void afficher (sequence_t* seq)
 {
     assert (seq); /* Le pointeur doit être valide */

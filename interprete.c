@@ -7,7 +7,7 @@
 #endif
 #include "listes.h"
 #include "curiosity.h"
-
+#include "pile.h"
 
 /*
  *  Auteur(s) :
@@ -25,12 +25,11 @@ void stop (void)
 
 
 
-int interprete (sequence_t* seq, bool debug)
+int interprete (sequence_t* seq, bool debug,pile_t *p)
 {
     // Version temporaire a remplacer par une lecture des commandes dans la
     // liste chainee et leur interpretation.
     char commande;
-
 
 
     debug = true; /* À enlever par la suite et utiliser "-d" sur la ligne de commandes */
@@ -60,6 +59,14 @@ int interprete (sequence_t* seq, bool debug)
             case 'D':
                 droite();
                 break; /* à ne jamais oublier !!! */
+            case '0'...'9':
+                empile(p,commande - 48 );
+                break;
+            case '+':
+            case '-':
+            case '*':
+                calcul(p,commande);
+                break;
             default:
                 eprintf("Caractère inconnu: '%c'\n", commande);
         }
@@ -67,6 +74,7 @@ int interprete (sequence_t* seq, bool debug)
         commande = seq->tete->command ;
         /* Affichage pour faciliter le debug */
         afficherCarte();
+        afficherPile(p);
         printf ("Programme:");
         afficher(seq);
         printf ("\n");
