@@ -44,10 +44,10 @@ int interprete (sequence_t* seq, bool debug,pile_t *p)
     int ret;         //utilisée pour les valeurs de retour
 
     while ( seq->tete !=NULL ) { //à modifier: condition de boucle
-
         switch (commande) {
-            /* Ici on avance tout le temps, à compléter pour gérer d'autres commandes */
-
+            case '{':
+                ajout_groupe_pile(p,seq);
+                break;
             case 'A':
                 ret = avance();
                 if (ret == VICTOIRE) return VICTOIRE; /* on a atteint la cible */
@@ -66,6 +66,15 @@ int interprete (sequence_t* seq, bool debug,pile_t *p)
             case '-':
             case '*':
                 calcul(p,commande);
+                break;
+            case 'P':
+                pose(depile(p));
+                break;
+            case 'M':
+                empile(p,mesure(depile(p)));
+                break;
+            case '?':
+                ajout_groupe_file(p,seq);
                 break;
             default:
                 eprintf("Caractère inconnu: '%c'\n", commande);

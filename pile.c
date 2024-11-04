@@ -7,6 +7,8 @@
 #endif
 #include "pile.h"
 #include "string.h"
+#include "listes.h"
+
 
 element_t* nouvelleElement (void)
 {
@@ -38,9 +40,8 @@ char depile(pile_t *p){
 }
 
 void calcul(pile_t *p, char opp){
-    int a= depile(p) ;
-    printf("a:%d",a);
-    int b=(int) depile(p);
+    int b= depile(p) ;
+    int a=(int) depile(p);
     int res ;
     if (opp == '+'){
         res = a +b ;
@@ -58,11 +59,44 @@ void calcul(pile_t *p, char opp){
     }
 }
 
+
+
+char * groupe(pile_t *p,char groupe1[256],char groupe2[256]){
+    char c = depile(p);
+    int i =0;
+    while (c!='{')
+    {
+        printf("%c",c);
+        groupe1[i]=c;
+        c =depile(p);
+        i++;
+    }
+    i=0;
+    c= depile(p);
+    while (c!='{')
+    {
+        printf("%c",c);
+        groupe1[i]=c;
+        c =depile(p);
+        i++;
+    }
+    int val = depile(p);
+    if(val==0){
+
+        return groupe2;
+    }
+    else{
+        return groupe1;
+    }
+}
+
+
+
 void afficherPile(pile_t *p){
     if (p!=NULL){
         element_t *actuel = p->sommet;
         while (actuel != NULL){
-            printf("Pile : %d\n",actuel->command);
+            printf("Pile : %d %c  \n",actuel->command,actuel->command);
             actuel=actuel->suivant;
         }
         }

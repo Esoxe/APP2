@@ -1,6 +1,7 @@
 
 
 #include <stdbool.h>
+#include "pile.h"
 
 /*
  * Pour réaliser des tests de performance, désactiver tous les 
@@ -44,6 +45,12 @@ cellule_t* nouvelleCellule (void);
 void detruireCellule (cellule_t*);
 
 void conversion (char *texte, sequence_t *seq);
+
+void ajout_groupe_pile(pile_t *p ,sequence_t *seq);
+
+void ajout_groupe_file( pile_t *p, sequence_t *seq);
+
+void insert_pile (char *texte, sequence_t *seq);
 
 void afficher (sequence_t* seq);
 
