@@ -62,7 +62,7 @@ void ajout_groupe_pile( pile_t *p, sequence_t *seq){
 void insert_pile (char *texte, sequence_t *seq)
 {   
 
-    for(int i = strlen(texte) -1 ;i>=0;i--){
+    for(int i =0 ;i< (int) strlen((texte));i++){
         cellule_t*new =nouvelleCellule();
         new->command=texte[i];
         new->suivant=seq->tete->suivant;
