@@ -50,6 +50,5 @@ void calcul(pile_t *p ,char opp);
 
 void afficherPile(pile_t *p);
 
-char * groupe(pile_t *p,char groupe1[256], char groupe2[256]);
 
 #endif

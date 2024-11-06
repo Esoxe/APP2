@@ -74,7 +74,16 @@ int interprete (sequence_t* seq, bool debug,pile_t *p)
                 empile(p,mesure(depile(p)));
                 break;
             case '?':
-                ajout_groupe_file(p,seq);
+                exec_groupe_de_commande(p,seq);
+                break;
+            case 'X':
+                echange_sommet(p);
+                break;
+            case '!':
+                pile_exec(p,seq);
+                break;
+            case 'C':
+                clone(p);
                 break;
             default:
                 eprintf("Caractère inconnu: '%c'\n", commande);

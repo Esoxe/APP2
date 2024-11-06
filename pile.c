@@ -61,34 +61,6 @@ void calcul(pile_t *p, char opp){
 
 
 
-char * groupe(pile_t *p,char groupe1[256],char groupe2[256]){
-    char c = depile(p);
-    int i =0;
-    while (c!='{')
-    {
-        printf("%c",c);
-        groupe1[i]=c;
-        c =depile(p);
-        i++;
-    }
-    i=0;
-    c= depile(p);
-    while (c!='{')
-    {
-        printf("%c",c);
-        groupe1[i]=c;
-        c =depile(p);
-        i++;
-    }
-    int val = depile(p);
-    if(val==0){
-
-        return groupe2;
-    }
-    else{
-        return groupe1;
-    }
-}
 
 
 
@@ -96,7 +68,7 @@ void afficherPile(pile_t *p){
     if (p!=NULL){
         element_t *actuel = p->sommet;
         while (actuel != NULL){
-            printf("Pile : %d %c  \n",actuel->command,actuel->command);
+            printf("Pile : %c  %d \n",actuel->command,actuel->command);
             actuel=actuel->suivant;
         }
         }

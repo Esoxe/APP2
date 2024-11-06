@@ -48,9 +48,23 @@ void conversion (char *texte, sequence_t *seq);
 
 void ajout_groupe_pile(pile_t *p ,sequence_t *seq);
 
-void ajout_groupe_file( pile_t *p, sequence_t *seq);
+void exec_groupe_de_commande( pile_t *p, sequence_t *seq);
 
-void insert_pile (char *texte, sequence_t *seq);
+void insert_file (char *texte, sequence_t *seq);
+
+void parcours_groupe_pile(pile_t *p ,char texte[256]);
+
+
+void ajout_elem_pile(pile_t *p, char texte[256]);
+
+
+void lecture_pile(pile_t *p,char texte[256]);
+
+void echange_sommet(pile_t *p);
+
+void pile_exec(pile_t *p,sequence_t *seq);
+
+void clone(pile_t *p);
 
 void afficher (sequence_t* seq);
 
