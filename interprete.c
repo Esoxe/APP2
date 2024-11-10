@@ -85,6 +85,17 @@ int interprete (sequence_t* seq, bool debug,pile_t *p)
             case 'C':
                 clone(p);
                 break;
+            case 'B':
+                boucle(p,seq);
+                break;
+            case 'R':
+                rotation(p);
+                break;
+            case 'I':
+                ;
+                char temp[MAX_SIZE];
+                lecture_pile(p,temp);
+                break;
             default:
                 eprintf("Caractère inconnu: '%c'\n", commande);
         }

@@ -1,5 +1,5 @@
 
-
+#define MAX_SIZE 10000
 #include <stdbool.h>
 #include "pile.h"
 
@@ -52,13 +52,11 @@ void exec_groupe_de_commande( pile_t *p, sequence_t *seq);
 
 void insert_file (char *texte, sequence_t *seq);
 
-void parcours_groupe_pile(pile_t *p ,char texte[256]);
+void parcours_groupe_pile(pile_t *p ,char texte[MAX_SIZE]);
 
+void ajout_elem_pile(pile_t *p, char texte[MAX_SIZE]);
 
-void ajout_elem_pile(pile_t *p, char texte[256]);
-
-
-void lecture_pile(pile_t *p,char texte[256]);
+void lecture_pile(pile_t *p,char texte[MAX_SIZE]);
 
 void echange_sommet(pile_t *p);
 
@@ -66,7 +64,9 @@ void pile_exec(pile_t *p,sequence_t *seq);
 
 void clone(pile_t *p);
 
+void boucle(pile_t *p,sequence_t *seq);
+
 void afficher (sequence_t* seq);
 
-
+void rotation(pile_t *p);
 

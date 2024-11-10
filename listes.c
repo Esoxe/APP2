@@ -59,7 +59,6 @@ void afficher (sequence_t* seq)
 void ajout_groupe_pile( pile_t *p, sequence_t *seq){
     int cpt =1;
     cellule_t *current=seq->tete->suivant;
-    printf("c:  %c\n",current->command);
     empile(p,'{');
     while (cpt!=0)
     {
@@ -69,7 +68,6 @@ void ajout_groupe_pile( pile_t *p, sequence_t *seq){
         if(current->command=='}'){
             cpt--;
         }
-        printf("c:  %c\n",current->command);
         empile(p,current->command);
         if(cpt>0){
         seq->tete=current->suivant;
@@ -97,7 +95,7 @@ void insert_file (char *texte, sequence_t *seq)
     }
 }
 
-void parcours_groupe_pile(pile_t *p ,char texte[256]){
+void parcours_groupe_pile(pile_t *p ,char texte[MAX_SIZE]){
     int cpt=1;
     char c;
     depile(p);
@@ -120,11 +118,12 @@ void parcours_groupe_pile(pile_t *p ,char texte[256]){
 
 
 void exec_groupe_de_commande( pile_t *p, sequence_t *seq){
-    char groupe1[256];
-    char groupe2[256];
+    char groupe1[MAX_SIZE];
+    char groupe2[MAX_SIZE];
     parcours_groupe_pile(p,groupe1);
     parcours_groupe_pile(p,groupe2);
     int val = depile(p);
+    printf("%d",val);
     if(val==0){
         insert_file(groupe1,seq);
     }
@@ -133,7 +132,7 @@ void exec_groupe_de_commande( pile_t *p, sequence_t *seq){
     }
 }
 
-void lecture_pile(pile_t *p,char texte[256]){
+void lecture_pile(pile_t *p,char texte[MAX_SIZE]){
     char c=depile(p);
     if (c=='}'){
         empile(p,c);
@@ -141,11 +140,11 @@ void lecture_pile(pile_t *p,char texte[256]){
     }
     else{
         texte[0] =c;
-        texte[1]='\n';
+        texte[1]='\0';
     }
 }
 
-void ajout_elem_pile(pile_t *p, char texte[256]){
+void ajout_elem_pile(pile_t *p, char texte[MAX_SIZE]){
     if(strlen(texte)==1){
         empile(p,texte[0]);
     }
@@ -157,8 +156,8 @@ void ajout_elem_pile(pile_t *p, char texte[256]){
 }
 
 void echange_sommet(pile_t *p){
-    char temp1[256];
-    char temp2[256];
+    char temp1[MAX_SIZE];
+    char temp2[MAX_SIZE];
     lecture_pile(p,temp1);
     lecture_pile(p,temp2);
     ajout_elem_pile(p,temp1);
@@ -166,16 +165,53 @@ void echange_sommet(pile_t *p){
 }
 
 void pile_exec(pile_t *p,sequence_t *seq){
-    char elem[256];
+    char elem[MAX_SIZE];
     lecture_pile(p,elem);
     insert_file(elem,seq);
 }
 
 void clone(pile_t *p){
-    char temp[256];
-    printf("test : \n");
-    afficherPile(p);
+    char temp[MAX_SIZE];
     lecture_pile(p,temp);
-    ajout_elem_pile(p,temp);
-    ajout_elem_pile(p,temp);
+    ajout_elem_pile(p, temp);  // Ajouter une copie du caractère à la pile
+    ajout_elem_pile(p, temp);  // Ajouter une autre copie du caractère à la pile
+}
+void boucle(pile_t *p,sequence_t *seq){
+    int n = depile(p);
+    printf("%d\n",n);
+    n--;
+    if(n>0){ //Remet B dans la routine
+        cellule_t *new = nouvelleCellule();
+        new->command=seq->tete->command;
+        new->suivant=seq->tete;
+        seq->tete=new;
+        char cmd[MAX_SIZE];
+        lecture_pile(p,cmd); //recupere la suite de commande et la remet sur la pile
+        ajout_elem_pile(p,cmd);
+        pile_exec(p,seq); //execute la commande
+        ajout_elem_pile(p,cmd);
+        empile(p,n);
+    }   
+    else {
+        pile_exec(p,seq);
+    }
+    
+}
+
+
+void rotation(pile_t *p){
+    int x=depile(p);
+    int n=depile(p);
+    char * element_pile[100];
+    for(int i=0;i<n;i++){
+        element_pile[i]=malloc(MAX_SIZE*sizeof(char));
+        lecture_pile(p,element_pile[i]);
+    }
+    for(int i=n-x-1;i>=0;i--){
+        ajout_elem_pile(p,element_pile[i]);
+        }
+        afficherPile(p);
+    for(int i=n-1;i>=n-x;i--){
+        ajout_elem_pile(p,element_pile[i]);
+        }
 }

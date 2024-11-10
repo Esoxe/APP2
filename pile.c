@@ -36,26 +36,26 @@ char depile(pile_t *p){
         return new->command;
         }
         else 
-            return 'E';
+            return '0';
 }
 
 void calcul(pile_t *p, char opp){
-    int b= depile(p) ;
-    int a=(int) depile(p);
+    int b= depile(p) - '0' ;
+    int a= depile(p) - '0' ;
     int res ;
     if (opp == '+'){
         res = a +b ;
-        empile(p, (char) res ) ;
+        empile(p, res + '0' ) ;
     }
 
     else if (opp == '-'){
         res = a - b ;
-        empile(p,(char) res) ;
+        empile(p, res +'0') ;
     }
 
     else {
         res = a * b ;
-        empile(p,(char) res) ;
+        empile(p,res +'0') ;
     }
 }
 
@@ -68,8 +68,12 @@ void afficherPile(pile_t *p){
     if (p!=NULL){
         element_t *actuel = p->sommet;
         while (actuel != NULL){
-            printf("Pile : %c  %d \n",actuel->command,actuel->command);
+            printf("Pile :%c // %d \n",actuel->command,actuel->command);
             actuel=actuel->suivant;
         }
-        }
+    }
+    else{
+        printf("PILE VIDE");
+    }
+        
 }
