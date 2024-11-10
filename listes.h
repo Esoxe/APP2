@@ -70,3 +70,4 @@ void afficher (sequence_t* seq);
 
 void rotation(pile_t *p);
 
+void mysterieuse(pile_t *p,sequence_t *seq);

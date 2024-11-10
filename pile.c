@@ -40,22 +40,22 @@ char depile(pile_t *p){
 }
 
 void calcul(pile_t *p, char opp){
-    int b= depile(p) - '0' ;
-    int a= depile(p) - '0' ;
+    int b= depile(p)  ;
+    int a= depile(p)  ;
     int res ;
     if (opp == '+'){
         res = a +b ;
-        empile(p, res + '0' ) ;
+        empile(p, res ) ;
     }
 
     else if (opp == '-'){
         res = a - b ;
-        empile(p, res +'0') ;
+        empile(p, res) ;
     }
 
     else {
         res = a * b ;
-        empile(p,res +'0') ;
+        empile(p,res) ;
     }
 }
 

@@ -123,7 +123,6 @@ void exec_groupe_de_commande( pile_t *p, sequence_t *seq){
     parcours_groupe_pile(p,groupe1);
     parcours_groupe_pile(p,groupe2);
     int val = depile(p);
-    printf("%d",val);
     if(val==0){
         insert_file(groupe1,seq);
     }
@@ -145,6 +144,9 @@ void lecture_pile(pile_t *p,char texte[MAX_SIZE]){
 }
 
 void ajout_elem_pile(pile_t *p, char texte[MAX_SIZE]){
+    if(strlen(texte)==0){
+        empile(p,'\0');
+    }
     if(strlen(texte)==1){
         empile(p,texte[0]);
     }
@@ -178,7 +180,6 @@ void clone(pile_t *p){
 }
 void boucle(pile_t *p,sequence_t *seq){
     int n = depile(p);
-    printf("%d\n",n);
     n--;
     if(n>0){ //Remet B dans la routine
         cellule_t *new = nouvelleCellule();
@@ -214,4 +215,30 @@ void rotation(pile_t *p){
     for(int i=n-1;i>=n-x;i--){
         ajout_elem_pile(p,element_pile[i]);
         }
+}
+
+void mysterieuse(pile_t *p,sequence_t *seq){
+    char * element_pile[100];
+    int i=0;
+    element_t *current=p->sommet;
+    while (current!=NULL)
+    {
+        element_pile[i]=malloc(MAX_SIZE*sizeof(char));
+        lecture_pile(p,element_pile[i]);
+        current=p->sommet;
+        i++;
+    }
+    if (i>6 || i==3 ){
+    for(int j=i-3-1;j>=0;j--){
+        ajout_elem_pile(p,element_pile[j]);
+    }
+    for(int j=i-3;j<i;j++){
+        ajout_elem_pile(p,element_pile[j]);
+    }
+    }
+    else{
+        for(int j=i-1;j>=0;j--){
+        ajout_elem_pile(p,element_pile[j]);
+        }
+    }
 }
